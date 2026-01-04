@@ -1,0 +1,29 @@
+{
+  "title": "UK interest rate vs house price index (cleaned)",
+  "source_file": "boe_millennium.xlsx",
+  "source_provider": "Bank of England - 'A millennium of macroeconomic data for the UK' (BoE Research Datasets)",
+  "time_coverage": {
+    "start_year": 1917,
+    "end_year": 2016
+  },
+  "frequency": "Annual",
+  "table_name_sqlite": "uk_interest_house_prices_annual",
+  "variables": [
+    {
+      "name": "policy_rate_avg_pct",
+      "description": "Policy interest rate (annual average, percent). Extracted from BoE Millennium dataset Table A31.",
+      "unit": "percent"
+    },
+    {
+      "name": "house_price_index_long_run",
+      "description": "UK house price index long-run (spliced) series. Extracted from BoE Millennium dataset Table A32.",
+      "unit": "index (as provided by BoE long-run series)"
+    }
+  ],
+  "cleaning_steps": [
+    "Read A31 and A32 sheets from BoE millennium spreadsheet.",
+    "Coerce year and values to numeric; drop rows with missing year or value.",
+    "Inner-join on year; keep years 1917\u20132016 inclusive.",
+    "Persist to CSV and SQLite; create index on year in SQLite."
+  ]
+}
